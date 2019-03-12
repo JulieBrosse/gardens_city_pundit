@@ -27,6 +27,10 @@ class GardensController < ApplicationController
     @gardens = policy_scope(Garden).order(created_at: :desc)
   end
 
+  def my_gardens
+    @gardens = policy_scope(Garden).order(created_at: :desc).find(owner: user)
+  end
+
   def show
     authorize @garden
   end
