@@ -1,13 +1,23 @@
 <h1>index</h1>
+<% if current_user.admin == true %>
+<b><%= "ADMIN STATUS" %></b>
+<% else %>
+<b><%= "USER STATUS" %></b>
+
+<% end %>
 <ul>
-  <li>  <% @gardens.each do |garden| %>
-    <ul>
-      <li><%= garden.title %> //
-        <%= garden.user.email %> //
-        <%= link_to "edit", edit_garden_path(garden) %>
-        <%= link_to "delete", delete_garden_path(garden), method: :delete %>
-      </li>
-    </ul>
+    <% @gardens.each do |garden| %>
+    <li><%= garden.title %> //
+    <%= garden.user.email %> //
+    <%= link_to "edit", edit_garden_path(garden) %>
+    <%= link_to "delete", delete_garden_path(garden), method: :delete %>
+  </li>
   <% end %>
-  <li><%= link_to "Add New Garden", new_garden_path %></li>
+</ul>
+
+<ul>
+  <% if policy(Garden).create? %>
+    <li><%= link_to "New Garden", new_garden_path %></li>
+  <% end %>
+ <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
 </ul>
