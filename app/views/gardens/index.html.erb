@@ -7,10 +7,8 @@
 <% end %>
 <ul>
     <% @gardens.each do |garden| %>
-    <li><%= garden.title %> //
-    <%= garden.user.email %> //
-    <%= link_to "edit", edit_garden_path(garden) %>
-    <%= link_to "delete", delete_garden_path(garden), method: :delete %>
+    <li><%= link_to "#{garden.title}", garden_path(garden) %> //
+    <%= garden.user.email %>
   </li>
   <% end %>
 </ul>
@@ -20,4 +18,7 @@
     <li><%= link_to "New Garden", new_garden_path %></li>
   <% end %>
  <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+ <% if current_user.admin == false %>
+  <li><%= link_to "My gardens", my_gardens_path %></li>
+  <% end %>
 </ul>

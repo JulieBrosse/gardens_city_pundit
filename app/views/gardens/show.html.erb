@@ -4,11 +4,11 @@
 <li>Address : <%= @garden.address %></li>
 <li>Details : <%= @garden.details %></li>
 <li>Surface : <%= @garden.surface %></li>
-<li><%= link_to "My gardens", gardens_path %> //
 <% if policy(@garden).destroy? %>
-  <%= link_to "Delete" %> //
+  <li><%= link_to "Delete" %> //
 <% end %>
 <% if policy(@garden).edit? %>
   <%= link_to "Edit" %></li>
 <% end %>
+<li><%= link_to "home", gardens_path %></li>
 </ul>

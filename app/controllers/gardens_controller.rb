@@ -8,6 +8,7 @@ class GardensController < ApplicationController
   def create
     @garden = Garden.new(garden_params)
     authorize @garden
+#    authorize @garden, policy_scope_class: GardenPolicy::Myscope   ???
 
     @garden.user = current_user
 # OU :     @garden = current_user.gardens.build(garden_params)
@@ -24,11 +25,12 @@ class GardensController < ApplicationController
   end
 
   def index
-    @gardens = policy_scope(Garden).order(created_at: :desc)
+      @gardens = policy_scope(Garden)
   end
 
   def my_gardens
-    @gardens = policy_scope(Garden).order(created_at: :desc).find(owner: user)
+    @gardens = GardenPolicy::Scope.new(current_user, Garden).scope.where(user: current_user)
+
   end
 
   def show
@@ -36,11 +38,11 @@ class GardensController < ApplicationController
   end
 
   def destroy
-    authorize @restaurant
+    authorize @garden
 
-    @restaurant.destroy
+    @garden.destroy
     respond_to do |format|
-      format.html { redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.' }
+      format.html { redirect_to gardens_url, notice: 'garden was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

@@ -1,13 +1,17 @@
 class GardenPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
-#      unless user.admin == true
-#        scope.where(user: user) # n'affiche dans l'index que les restos du owner
-#      else
-#        scope.all #>> permet d'afficher tous les restos dans index
-#      end
+ #     unless user.admin == true
+ #       scope.where(user: user) # n'affiche dans l'index que les restos du owner
+ #     else
+        scope.all #>> permet d'afficher tous les restos dans index
+ #     end
     end
+ #   class MyScope < Scope
+ #     def resolve
+ #       scope.where(user: user)
+ #     end
+ # end
   end
 
   def create?
