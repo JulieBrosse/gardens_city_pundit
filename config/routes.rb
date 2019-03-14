@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :bookers
   devise_for :users
   delete 'gardens/:id', to: "gardens#destroy", as: :delete_garden
   resources :gardens, except: [:delete]
