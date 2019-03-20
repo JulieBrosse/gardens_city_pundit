@@ -1,0 +1,9 @@
+<h1>My booking</h1>
+  <%= simple_form_for [@garden, @booking] do |f| %>
+  <%= f.input :booker_id, input_html: {value: current_user.id}, disabled: true %>
+  <%= f.input :garden, input_html: {value: @garden.title}, disabled: true %>
+  <%= f.input :date, input_html: {value: DateTime.now.to_date} %>
+  <%= f.submit %>
+  <% end %>
+
+

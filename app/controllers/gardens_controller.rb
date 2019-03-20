@@ -3,6 +3,7 @@ class GardensController < ApplicationController
   def new
     @garden = Garden.new
     authorize @garden
+
   end
 
   def create
@@ -34,6 +35,7 @@ class GardensController < ApplicationController
   end
 
   def show
+    raise
     authorize @garden
   end
 
