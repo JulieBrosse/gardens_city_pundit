@@ -17,16 +17,12 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(booking_params)
+    @garden = Garden.find params[:garden_id]
+    @booking = @garden.bookings.build(booker: current_user, owner: @garden.user)
     authorize @booking
-    @booking.garden = Garden.find(params[:garden_id])
-    @booking.booker_id = current_user.id
-    @booking.date = DateTime.now.to_date
-    @booking.save
-
-#    @booking.garden = @garden
-#    @booking.booker_id = current_user
-    redirect_to root_path
+    if @booking.save
+      redirect_to @garden
+    end
   end
 
   def update

@@ -13,5 +13,6 @@
     <% end %>
   <li><%= link_to "home", gardens_path %></li>
   <li><%= link_to "My gardens", my_gardens_path %></li>
-  <li><%= link_to "Book the Garden", new_garden_booking_path(@garden) %></li>
+  <li><%= link_to "Book the Garden", garden_bookings_path(@garden), method: :post %>
+</li>
 </ul>

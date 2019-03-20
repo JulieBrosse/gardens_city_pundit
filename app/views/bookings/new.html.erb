@@ -1,3 +1,5 @@
+THIS PAGE IS NOT USED BUT KEPT IN ORDER TO HAVE A MODEL OF AUTOCOMPLETE SIMPLE_FORM FOR LATER IF NEEDED
+
 <h1>My booking</h1>
   <%= simple_form_for [@garden, @booking] do |f| %>
   <%= f.input :booker_id, input_html: {value: current_user.id}, disabled: true %>
@@ -5,5 +7,3 @@
   <%= f.input :date, input_html: {value: DateTime.now.to_date} %>
   <%= f.submit %>
   <% end %>
-
-

@@ -7,7 +7,7 @@ class GardensController < ApplicationController
   end
 
   def create
-    @garden = Garden.new(garden_params)
+    @garden = Garden.new(garden_params).build(owner: current_user)
     authorize @garden
 #    authorize @garden, policy_scope_class: GardenPolicy::Myscope   ???
 
@@ -35,7 +35,6 @@ class GardensController < ApplicationController
   end
 
   def show
-    raise
     authorize @garden
   end
 
