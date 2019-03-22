@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 include Pundit
 
   # Pundit: white-list approach.
-  after_action :verify_authorized, except: [:index, :my_gardens], unless: :skip_pundit?
+  after_action :verify_authorized, except: [:index, :my_gardens, :my_bookings], unless: :skip_pundit?
 #  after_action :verify_policy_scoped, only: [:index, :my_gardens], unless: :skip_pundit?
 
   # Uncomment when you *really understand* Pundit!

@@ -1,5 +1,5 @@
 class GardensController < ApplicationController
-  before_action :set_garden, only: [:show, :destroy, :edit, :update ]
+  before_action :set_garden, only: [:show, :edit, :update ]
   def new
     @garden = Garden.new
     authorize @garden
@@ -7,7 +7,7 @@ class GardensController < ApplicationController
   end
 
   def create
-    @garden = Garden.new(garden_params).build(owner: current_user)
+    @garden = Garden.new(garden_params)
     authorize @garden
 #    authorize @garden, policy_scope_class: GardenPolicy::Myscope   ???
 
@@ -30,8 +30,7 @@ class GardensController < ApplicationController
   end
 
   def my_gardens
-    @gardens = GardenPolicy::Scope.new(current_user, Garden).scope.where(user: current_user)
-
+    @gardens = GardenPolicy::Scope.new(current_user, Garden).scope.where(user_id: current_user)
   end
 
   def show
@@ -39,13 +38,15 @@ class GardensController < ApplicationController
   end
 
   def destroy
+    @garden = Garden.find(params[:format])
     authorize @garden
-
     @garden.destroy
-    respond_to do |format|
-      format.html { redirect_to gardens_url, notice: 'garden was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+#      format.html { redirect_to my_gardens_path, notice: 'garden was successfully destroyed.' }
+#      format.json { head :no_content }
+#    else
+#      "sorry it was not deleted"
+#    end
+    redirect_to my_gardens_path
   end
 
   def edit
@@ -69,7 +70,7 @@ end
   private
 
   def garden_params
-    params.require(:garden).permit(:title, :details, :surface, :address, :availabilities)
+    params.require(:garden).permit(:title, :details, :surface, :address, :availabilities, :user)
   end
 
   def set_garden

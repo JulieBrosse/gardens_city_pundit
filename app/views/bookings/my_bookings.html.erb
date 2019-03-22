@@ -1,0 +1,14 @@
+<h1>My Bookings</h1>
+<% @bookings.each do |booking| %>
+  <li>
+  <%= link_to booking.garden.title, garden_booking_path(booking,current_user) %> //
+  <%= booking.booker.email %>
+  </li>
+<% end %>
+
+</ul>
+  <li><%= link_to "My Account", my_account_path %></li>
+  <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+  <li><%= link_to "home", root_path %></li>
+  <% if current_user.admin == false %>
+  <% end %>

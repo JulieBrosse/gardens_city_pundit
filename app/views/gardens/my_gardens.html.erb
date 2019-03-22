@@ -7,11 +7,9 @@
   <% end %>
 
 </ul>
+<li><%= link_to "Add a garden", new_garden_path %></li>
 <li><%= link_to "HOME", root_path %></li>
-  <% if policy(Garden).create? %>
-    <li><%= link_to "New Garden", new_garden_path %></li>
-  <% end %>
-  <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-  <% if current_user.admin == false %>
-  <% end %>
+<li><%= link_to "My Account", my_account_path %></li>
+<% if current_user.admin == false %>
+<% end %>
 

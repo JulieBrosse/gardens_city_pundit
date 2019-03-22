@@ -6,10 +6,10 @@
   <li>Surface : <%= @garden.surface %></li>
   <p> Here will appear the availabilities to select</p>
     <% if policy(@garden).destroy? %>
-      <li><%= link_to "Delete" %> //
+      <li><%= link_to "Delete", delete_garden_path(@garden), method: :delete %> //
     <% end %>
     <% if policy(@garden).edit? %>
-      <%= link_to "Edit" %></li>
+      <%= link_to "Edit", edit_garden_path %></li>
     <% end %>
   <li><%= link_to "home", gardens_path %></li>
   <li><%= link_to "My gardens", my_gardens_path %></li>
