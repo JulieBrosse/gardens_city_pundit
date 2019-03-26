@@ -24,7 +24,7 @@ class BookingsController < ApplicationController
 
   def create
     @garden = Garden.find params[:garden_id]
-    @booking = @garden.bookings.build(booker: current_user, owner: @garden.user)
+    @booking = @garden.bookings.build(date: DateTime.now.to_date, booker_id: current_user.id)
     authorize @booking
     if @booking.save!
       redirect_to garden_booking_path(@booking, current_user)
@@ -53,7 +53,7 @@ raise
   def set_booking_format
     @booking = Booking.find(params[:format])
   end
-#  def booking_params
-#    params.require(:booking).permit(:garden_id, :booker_id, :date)
-#  end
+  def booking_params
+    params.require(:booking).permit(:garden_id, :booker_id, :date)
+  end
 end
