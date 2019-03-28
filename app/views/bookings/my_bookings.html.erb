@@ -2,7 +2,8 @@
 <% @bookings.each do |booking| %>
   <li>
   <%= link_to booking.garden.title, garden_booking_path(booking,current_user) %> //
-  <%= booking.booker.email %>
+  <%  booker = User.where(id: booking.booker_id)%>
+  <%= booker %>
   </li>
 <% end %>
 

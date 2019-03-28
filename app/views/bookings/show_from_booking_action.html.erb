@@ -1,0 +1,7 @@
+<h1>your booking</h1>
+<%= @booking.garden.title %>
+
+<li><%= link_to "My bookings", my_bookings_path %></li>
+<li><%= link_to "HOME", root_path %></li>
+<li><%= link_to "Cancel my booking", delete_booking_path(@booking, current_user), method: :delete %></li>
+<li><%= "Send a message to the owner" %></li>

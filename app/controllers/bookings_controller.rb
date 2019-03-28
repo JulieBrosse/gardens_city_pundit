@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :edit, :update ]
+  before_action :set_booking, only: [:edit, :update ]
   before_action :set_booking_format, only: [:destroy ]
 
 
@@ -7,12 +7,17 @@ class BookingsController < ApplicationController
   end
 
   def my_bookings
-    # NE MARCHE PAS CAR BOOKER N'EST PAS RECONNU
-    @bookings = BookingPolicy::Scope.new(current_user, Booking).scope.where(booker: current_user)
+    @bookings = BookingPolicy::Scope.new(current_user, Booking).scope.where(booker_id: current_user.id)
   end
 
   def show
-    raise
+    if params[:id] == current_user.id.to_s
+      @booking = Booking.find(params[:garden_id])
+    elsif
+      @booking = Booking.find(params[:id])
+    else
+      @booking = Booking.find(params[:garden_id])
+    end
     authorize @booking
   end
 
@@ -24,10 +29,11 @@ class BookingsController < ApplicationController
 
   def create
     @garden = Garden.find params[:garden_id]
-    @booking = @garden.bookings.build(date: DateTime.now.to_date, booker_id: current_user.id)
+    @booking = @garden.bookings.build(date: DateTime.now.to_date)
+    @booking.booker_id = current_user.id.to_i
     authorize @booking
-    if @booking.save!
-      redirect_to garden_booking_path(@booking, current_user)
+    if @booking.save
+      redirect_to garden_booking_path( current_user, @booking)
     end
   end
 
@@ -38,7 +44,6 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-raise
     authorize @booking
     @booking.destroy
     redirect_to my_bookings_path
