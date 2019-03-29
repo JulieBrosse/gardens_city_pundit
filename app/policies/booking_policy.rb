@@ -32,7 +32,6 @@ class BookingPolicy < ApplicationPolicy
   private
 
   def user_is_the_owner_or_admin?
-    true
-    #user.admin || record.booker == user
+    user.admin || record.booker == user
   end
 end

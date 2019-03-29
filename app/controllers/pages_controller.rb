@@ -6,4 +6,7 @@ class PagesController < ApplicationController
 
   def my_account
   end
+
+  def garden_research
+  end
 end
