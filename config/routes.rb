@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+devise_for :users, controllers: {registrations: 'users/registrations'}
+devise_scope :user do
+  get "edit_place", to: "users/registrations#edit_place", as: :edit_place
+end
+
   resources :gardens, except: [:destroy, :new] do
     resources :bookings, only: [:new, :create, :show]
   end
@@ -11,6 +15,7 @@ Rails.application.routes.draw do
   get "bookings", to: "bookings#my_bookings", as: :my_bookings
   get "show_from_booking_action", to: "bookings#show_from_booking_action", as: :show_from_booking_action # >>> put in nested resources, such as :show
   get "my_account", to: "pages#my_account", as: :my_account
+
 
   root to: 'pages#home'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
