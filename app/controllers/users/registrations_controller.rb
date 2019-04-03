@@ -38,7 +38,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  def edit_place
+  def edit_place_and_radius
+    @user = current_user
+  end
+
+    def update_place_and_radius
+    current_user.update(user_params)
+    flash[:success] = 'Your location and search radius have been updated'
+    redirect_to gardens_path
   end
 
   def update
@@ -50,7 +57,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
  private
 
  def user_params
-  params.require(:user).permit(:email, :address)
+  params.require(:user).permit(:email, :address, :search_radius)
  end
 
   # If you have extra params to permit, append them to the sanitizer.

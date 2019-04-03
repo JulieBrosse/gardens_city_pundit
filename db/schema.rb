@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_02_125130) do
+ActiveRecord::Schema.define(version: 2019_04_03_122658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,10 +56,10 @@ ActiveRecord::Schema.define(version: 2019_04_02_125130) do
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
     t.string "location"
-    t.string "search_radius"
     t.float "latitude"
     t.float "longitude"
     t.string "address"
+    t.float "search_radius"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

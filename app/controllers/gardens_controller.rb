@@ -26,12 +26,13 @@ class GardensController < ApplicationController
   end
 
   def index
-    # REMPLACER PAR :
-    # user_place = User.latitude, User.longitude
-    # distance = User.distance_choice
-    # @gardens = policy_scope(Garden).near(user_place, distance)
+    # REMPLACER PAR
+    lat = current_user.latitude
+    lon = current_user.longitude
+    radius = current_user.search_radius
+    @gardens = policy_scope(Garden).near([lat, lon], radius)
 
-      @gardens = policy_scope(Garden)
+  #    @gardens = policy_scope(Garden)
   end
 
   def my_gardens
