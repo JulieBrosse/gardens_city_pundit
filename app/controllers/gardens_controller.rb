@@ -3,7 +3,6 @@ class GardensController < ApplicationController
   def new
     @garden = Garden.new
     authorize @garden
-
   end
 
   def create

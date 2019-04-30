@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+#  before_action :configure_sign_up_params, only: [:create]
+#  before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   # def new
@@ -38,12 +38,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+
   def edit_place_and_radius
+    if current_user == nil
+      flash[:alert] = "You need to sign in to access the gardens"
+      redirect_to user_session_path
+    else
     @user = current_user
   end
+  end
 
-    def update_place_and_radius
+  def update_place_and_radius
+    if @address.blank?
+      @address = request.location.coordinates
+      #>>>>> LA GEOLOCALISATION NE MARCHE PAS POUR LE MOMENT (NOUS SITUE A PARIS AUTOMATIQUEMENT)
     current_user.update(user_params)
+  else
+    current_user.update(user_params)
+
+  end
     flash[:success] = 'Your location and search radius have been updated'
     redirect_to gardens_path
   end

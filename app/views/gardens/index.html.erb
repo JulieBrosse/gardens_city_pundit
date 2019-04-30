@@ -1,4 +1,4 @@
-<h1>index</h1>
+<h1>Available Gardens</h1>
 <% if current_user.admin == true %>
 <b><%= "ADMIN STATUS" %></b>
 <% else %>
@@ -6,10 +6,17 @@
 
 <% end %>
 <ul>
-    <% @gardens.each do |garden| %>
+  <% @gardens.each do |garden| %>
     <li><%= link_to "#{garden.title}", garden_path(garden) %> //
-    <%= garden.user.email %>
-  </li>
+      <% if garden.user_id == current_user.id %>
+        <%= 'Your garden' %>
+      <% else %>
+       <%= garden.user.email %>
+      <% end %>
+      <% if garden.availabilities == false %>
+        <%= '// !! Currently unavailable !!' %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 

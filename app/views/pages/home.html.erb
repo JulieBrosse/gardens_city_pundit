@@ -1,6 +1,8 @@
-<h1>Welcome at Gardens in the Walls</h1>
-<ul>
-  <li><%= link_to "My account", my_account_path %></li>
-  <li><%= link_to "Garden Research", edit_place_and_radius_path(@user) %></li>
-  <li><%= link_to "Change my identifiers", edit_user_registration_path %></li>
-</ul>
+<div class="home-banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)),
+         url(https://frarborists.com/dev/wp-content/uploads/shutterstock_126246674.jpg">
+  <h1>Welcome at <br/>Gardens in the Walls</h1>
+  <div class="banner-menu">
+        <%= link_to "My account", my_account_path %>
+        <%= link_to "Go picking", edit_place_and_radius_path(@user) %>
+  </div>
+</div>

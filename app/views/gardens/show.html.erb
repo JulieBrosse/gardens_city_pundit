@@ -13,6 +13,9 @@
     <% end %>
   <li><%= link_to "home", gardens_path %></li>
   <li><%= link_to "My gardens", my_gardens_path %></li>
-  <li><%= link_to "Book the Garden", garden_bookings_path(@garden), method: :post %>
-</li>
+  <% if @garden.availabilities == true %>
+    <li><%= link_to "Book the Garden", garden_bookings_path(@garden), method: :post %></li>
+  <% else %>
+  <li>This garden is currently unavailable</li>
+  <% end %>
 </ul>

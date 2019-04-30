@@ -1,0 +1,42 @@
+.home-banner{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  color: white;
+}
+
+.home-banner h1{
+    font-family: 'Fjalla One', sans-serif;
+  font-size: 70px;
+  margin: 0;
+}
+
+.banner-menu{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+.banner-menu a{
+  margin: 20px;
+  text-decoration: none;
+  color: white;
+  font-family: 'Abel', sans-serif;
+  font-size: 30px;
+  padding: 20px;
+  border: solid white;
+  border-width: thin;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.banner-menu a:hover{
+  font-weight: bold;
+  border-width: thick;
+  margin-top: 0;
+}
