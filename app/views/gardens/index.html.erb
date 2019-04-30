@@ -1,26 +1,74 @@
-<h1>Available Gardens</h1>
-<% if current_user.admin == true %>
-<b><%= "ADMIN STATUS" %></b>
-<% else %>
-<b><%= "USER STATUS" %></b>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <a class="navbar-brand" href="#">
+    <img src="/logo.png" />
+</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<% end %>
-<ul>
-  <% @gardens.each do |garden| %>
-    <li><%= link_to "#{garden.title}", garden_path(garden) %> //
-      <% if garden.user_id == current_user.id %>
-        <%= 'Your garden' %>
-      <% else %>
-       <%= garden.user.email %>
-      <% end %>
-      <% if garden.availabilities == false %>
-        <%= '// !! Currently unavailable !!' %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
 
-<ul>
-  <li><%= link_to "HOME", root_path %></li>
-  <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
-</ul>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Messages</a>
+      </li>
+      <li class="nav-item dropdown">
+        <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- NAVBAR END -->
+
+
+<div class="container index-container">
+  <div class="row index-title-row d-flex flex-column">
+    <h1>Available Gardens</h1>
+    <% if current_user.admin == true %>
+      <b><%= "ADMIN STATUS" %></b>
+    <% else %>
+      <b><%= "USER STATUS" %></b>
+    <% end %>
+  </div>
+
+  <div class="row index-cards-container">
+    <% @gardens.each do |garden| %>
+      <div class="col-xs-12 col-sm-6 col-md-4">
+
+        <div class="card border border-white rounded shadow-lg p-3 mb-5 bg-white" style="background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.2)), url('http://huradozahrady.com/wp-content/uploads/2017/05/150919153848-01-popular-fruits-apples-super-169.jpg');">
+          <div class="card-body">
+            <h1>garden.title</h1>
+            <p> Owner :
+              <% if garden.user_id == current_user.id %>
+                <%= 'You' %>
+              <% else %>
+                <%= garden.user.email %>
+              <% end %>
+            </p>
+            <p> Status :
+            <% if garden.availabilities == false %>
+              <%= 'unavailable :(' %>
+            <% else %>
+              <%= "available :)" %>
+            <% end %>
+          </p>
+          <button type="button" class="btn btn-primary"><%= link_to "see details", garden_path(garden) %></button>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <ul>
+    <li><%= link_to "HOME", root_path %></li>
+    <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+  </ul>
+</div>
