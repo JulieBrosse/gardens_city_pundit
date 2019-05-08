@@ -1,7 +1,11 @@
-<h1>My Account</h1>
-
-  <li><%= link_to "My Bookings", my_bookings_path %></li>
-  <li><%= link_to "My gardens published", my_gardens_path %></li>
-  <li><%= link_to "Change my identifiers", edit_user_registration_path %></li></br>
-  <li><%= link_to "HOME", root_path %></li>
-  <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
+<%= render "shared/navbar" %>
+<div class="container index-container mt-5 d-flex flex-column">
+  <div class="row index-title-row ">
+    <h1>My Account</h1>
+  </div>
+  <div class="row text-white d-flex justify-content-around">
+    <button type="button" class="btn border shadow-lg mt-5px"><%= link_to "My Bookings", my_bookings_path %></button>
+    <button type="button" class="btn border shadow-lg mt-5px"><%= link_to "My gardens published", my_gardens_path %></button>
+    <button type="button" class="btn border shadow-lg mt-5px"><%= link_to "Change my identifiers", edit_user_registration_path %></button>
+  </div>
+</div>

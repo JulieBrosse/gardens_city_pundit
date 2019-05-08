@@ -31,7 +31,8 @@ class BookingsController < ApplicationController
     @garden = Garden.find params[:garden_id]
     @booking = @garden.bookings.build(date: DateTime.now.to_date)
     @booking.booker_id = current_user.id.to_i
-    @booking.availabilities = false
+    @garden.availabilities = false
+    @garden.save
     authorize @booking
     if @booking.save
       redirect_to garden_booking_path( current_user, @booking)

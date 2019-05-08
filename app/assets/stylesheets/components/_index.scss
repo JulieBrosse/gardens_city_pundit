@@ -5,8 +5,14 @@
 @import "banner";
 @import "card";
 @import "container";
+@import "button";
 
 body{
   min-height: 100vh;
+  color: rgb(87, 83, 82);
+  background-color: white;
 }
 
+a{
+  text-decoration: none;
+}

@@ -1,21 +1,42 @@
-<h1>My Garden</h1>
-<ul>
-  <li>Title : <%= @garden.title  %></li>
-  <li>Address : <%= @garden.address %></li>
-  <li>Details : <%= @garden.details %></li>
-  <li>Surface : <%= @garden.surface %></li>
-  <p> Here will appear the availabilities to select</p>
-    <% if policy(@garden).destroy? %>
-      <li><%= link_to "Delete", delete_garden_path(@garden), method: :delete %> //
-    <% end %>
-    <% if policy(@garden).edit? %>
-      <%= link_to "Edit", edit_garden_path %></li>
-    <% end %>
-  <li><%= link_to "home", gardens_path %></li>
-  <li><%= link_to "My gardens", my_gardens_path %></li>
-  <% if @garden.availabilities == true %>
-    <li><%= link_to "Book the Garden", garden_bookings_path(@garden), method: :post %></li>
-  <% else %>
-  <li>This garden is currently unavailable</li>
-  <% end %>
-</ul>
+<%= render "shared/navbar" %>
+<div class="row banner-show background d-flex justify-content-center border boder-black m-0">
+   <img src="https://www.harvesttotable.com/wp-content/uploads/2009/07/Apple-tree-with-fruit-300x300.jpg" alt="">
+</div>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-sm-4 d-flex justify-content-between d-flex flex-column">
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column">
+          <h1 class="text-capitalize"><%= @garden.title  %></h1>
+          <p class="mb-5">Subtitle</p>
+        </div>
+        <div>
+          <img class="avatar-show" src="https://avatars0.githubusercontent.com/u/414418?s=400&v=4"  alt="">
+          <% if policy(@garden).destroy? %>
+            <div>
+              <a class="text-decoration-none text-dark"><%= link_to "Delete", delete_garden_path(@garden), method: :delete %> //</a>
+              <a><%= link_to "edit", edit_garden_path %></a>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <h5 >Details :</h5><p> <%= @garden.details %></p>
+      <h5>Location :</h5> <p><%= @garden.address %></p>
+      <h5>Surface : </h5><p><%= @garden.surface %> m2</p>
+      <p> Here will appear the availabilities to select</p>
+    </div>
+
+      <div  class="col-sm-4 offset-sm-4 d-flex flex-column">
+        <div class="card boder p-5 border rounded">
+          <% if @garden.availabilities == true %>
+            <p>Fruits are ready to be picked</p>
+            <p class="btn btn-success"><%= link_to "Book the Garden", garden_bookings_path(@garden), method: :post %></p>
+          <% else %>
+            <p>This garden is currently unavailable</p>
+          <% end %>
+        </div>
+        <a><%= link_to "Gardens", gardens_path %></a>
+        <a><%= link_to "My gardens", my_gardens_path %></a>
+      </div>
+  </div>
+</div>

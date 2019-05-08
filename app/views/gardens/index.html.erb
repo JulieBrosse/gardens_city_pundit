@@ -1,37 +1,11 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <a class="navbar-brand" href="#">
-    <img src="/logo.png" />
-</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Messages</a>
-      </li>
-      <li class="nav-item dropdown">
-        <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://kitt.lewagon.com/placeholder/users/ssaunier" />
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div>
+<%= render "shared/navbar" %>
 
 <!-- NAVBAR END -->
 
 
-<div class="container index-container">
-  <div class="row index-title-row d-flex flex-column">
-    <h1>Available Gardens</h1>
+<div class="container index-container mt-5 d-flex flex-column">
+  <div class="row index-title-row d-flex flex-column ">
+    <h1>Gardens around you</h1>
     <% if current_user.admin == true %>
       <b><%= "ADMIN STATUS" %></b>
     <% else %>
@@ -39,13 +13,14 @@
     <% end %>
   </div>
 
-  <div class="row index-cards-container">
+  <div class="row index-cards-container ">
     <% @gardens.each do |garden| %>
       <div class="col-xs-12 col-sm-6 col-md-4">
 
-        <div class="card border border-white rounded shadow-lg p-3 mb-5 bg-white" style="background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.2)), url('http://huradozahrady.com/wp-content/uploads/2017/05/150919153848-01-popular-fruits-apples-super-169.jpg');">
-          <div class="card-body">
-            <h1>garden.title</h1>
+        <div class="card border border-white rounded shadow-lg p-3 mb-5 bg-white" style="width: 18rem;">
+            <img class="card-img-top" src="https://www.telegraph.co.uk/content/dam/gardening/2016/10/07/trees_trans_NvBQzQNjv4BqgsaO8O78rhmZrDxTlQBjdGLvJF5WfpqnBZShRL_tOZw.jpg?imwidth=1240" alt="Card image cap">
+          <div class="card-body pb-0 text-dark">
+            <h5><%= garden.title %></h5>
             <p> Owner :
               <% if garden.user_id == current_user.id %>
                 <%= 'You' %>
@@ -54,21 +29,23 @@
               <% end %>
             </p>
             <p> Status :
-            <% if garden.availabilities == false %>
-              <%= 'unavailable :(' %>
-            <% else %>
-              <%= "available :)" %>
-            <% end %>
-          </p>
-          <button type="button" class="btn btn-primary"><%= link_to "see details", garden_path(garden) %></button>
+              <% if garden.availabilities == false %>
+                <%= 'unavailable :(' %>
+              <% else %>
+               <%= "available :)" %>
+              <% end %>
+            </p>
+            <button type="button" class="btn btn-primary shadow-lg mt-5px"><%= link_to "see details", garden_path(garden) %></button>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 
+  <div class="row">
+
   <ul>
-    <li><%= link_to "HOME", root_path %></li>
     <li> <%= link_to "Sign out", destroy_user_session_path, method: :delete %></li>
   </ul>
+  </div>
 </div>
