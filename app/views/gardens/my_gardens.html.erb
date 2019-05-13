@@ -9,7 +9,7 @@
     <% @gardens.each do |garden| %>
       <div class="col-xs-12 col-sm-6 col-md-4">
 
-        <div class="card border border-white rounded shadow-lg p-3 mb-5 bg-white" style="width: 18rem;">
+        <div class="card border border-white rounded shadow-lg p-3 mb-5 bg-white">
             <img class="card-img-top" src="https://www.telegraph.co.uk/content/dam/gardening/2016/10/07/trees_trans_NvBQzQNjv4BqgsaO8O78rhmZrDxTlQBjdGLvJF5WfpqnBZShRL_tOZw.jpg?imwidth=1240" alt="Card image cap">
           <div class="card-body pb-0 text-dark">
             <h5><%= link_to "#{garden.title}", garden_path(garden) %></h5>
