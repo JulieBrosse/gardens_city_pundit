@@ -1,15 +1,20 @@
 .index-cards-container{
   margin-top: 10px;
-  height: 200px;
+  min-height: 200px;
   color: white;
   font-weight: bold;
 }
 
 
 .container{
-  height: 80vh;
+  min-height: 80vh;
+  display: flex;
 }
 
 .index-title-row{
   padding-left: 15px;
+}
+
+.index-container{
+  width: 70%;
 }
